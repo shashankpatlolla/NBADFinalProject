@@ -11,7 +11,7 @@ const ConfigureBudget = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        '/api/configure-budget',
+        'http://137.184.208.233/api/configure-budget',
         { name, expense, month },
         { headers: { Authorization: `Bearer ${token}` } }
       );

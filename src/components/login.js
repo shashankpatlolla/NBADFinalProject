@@ -14,7 +14,7 @@ const Login = () => {
     // For now, simply navigate to the home page on successful login
     //history('/home');
     try {
-      const response = await axios.post('/api/login', { username, password });
+      const response = await axios.post('http://137.184.208.233/api/login', { username, password });
       //localStorage.setItem('token', response.data.token);
       if (response.status === 200) {
         //localStorage.setItem('token', response.data.token);

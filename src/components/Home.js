@@ -21,12 +21,6 @@ const Home = () => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
   const [focusLockEnabled, setFocusLockEnabled] = useState(false);
 
-  //const [defaultMonthSet, setDefaultMonthSet] = useState(false);
-
-  // const [expenseData, setExpenseData] = useState([]);
-  // const [enteredExpenses, setEnteredExpenses] = useState([]);
-  //const [expenseData, setExpenseData] = useState([]);
-
   const months = [
     'January', 'February', 'March', 'April',
     'May', 'June', 'July', 'August',
@@ -77,7 +71,7 @@ const Home = () => {
     try {
       const username = localStorage.getItem('username');
       //console.log(username);
-      const response = await axios.get('/api/savedBudget', {
+      const response = await axios.get('http://137.184.208.233/api/savedBudget', {
         headers: {
           'x-username': username,
         },
@@ -125,7 +119,7 @@ const Home = () => {
     try {
       const username = localStorage.getItem('username');
       //console.log(username);
-      const response = await axios.get('/api/savedExpense', {
+      const response = await axios.get('http://137.184.208.233/api/savedExpense', {
         headers: {
           'x-username': username,
           'x-month': selectedMonth,
@@ -164,23 +158,6 @@ const Home = () => {
     };
     const WarrningTimeout = setTimeout(showWarning, tokenExpiration - 20000);
     setWarningCloseTimeoutId(WarrningTimeout);
-
-    /* if (tokenExpiration && currentTime > tokenExpiration - 10000) {
-      // if (tokenExpiration && timeUntilExpiration > 0 && timeUntilExpiration <= 10000) {
-        console.log("Shashank123");
-
-        //if (tokenExpiration && timeUntilExpiration > 0) {
-          console.log("Shashank1");
-      // Show a warning when the token is about to expire (20 seconds before)
-      //alert('Warning: Your session will expire in 20 seconds. Click "Refresh" to extend your session.');
-      setShowTokenExpirationWarning(true);
-      setTimeout(() => {
-        console.log("Shashank2");
-        setShowTokenExpirationWarning(false);
-       // handleLogout();
-        handleTokenExpirationResponse(false); // Auto handle as "Cancel"
-      }, 10000);
-    } */
   };
 
   const handleTokenExpirationResponse = (resumeSession) => {
@@ -195,7 +172,7 @@ const Home = () => {
       console.log("Cleared the timedout bcz ok is clicked");
       clearTimeout(closeTimeoutId);
       setShowTokenExpirationWarning(false);
-      checkTokenExpiration();
+      //checkTokenExpiration();
     } 
     else {
       console.log("else condition in handle expiration response");
@@ -208,31 +185,8 @@ const Home = () => {
     navigate('/');
   }; */
   useEffect(() => {
-    // Fetch budgets associated with the logged-in user
-    /* const fetchBudgets = async () => {
-      try {
-        //const token = localStorage.getItem('token'); // Make sure to handle token retrieval based on your implementation
-        const username = localStorage.getItem('username');
-
-        console.log("value of username from localstorage is",username);
-        const response = await axios.post('/api/budgets',{username});
-        console.log(response);  
-        setBudgets(response.data.budgets);
-      } catch (error) {
-        console.error('Budget retrieval failed:', error);
-        // Handle error
-      }
-    };
-
-    fetchBudgets(); */
-    //updateBudgets();
     UpdateExpensesperMonth();
-    /* if (!defaultMonthSet) {
-      const currentMonth = new Date().toLocaleString('default', { month: 'long' });
-      setSelectedMonth(currentMonth);
-      setDefaultMonthSet(true);
-    } */
-    console.log("at useeffect checktoken");
+    //console.log("at useeffect checktoken");
   }, [selectedMonth]);
 
   useEffect(()=>{
@@ -259,18 +213,6 @@ const Home = () => {
       <button className="btn btn-outline-warning me-2" type="button" onClick={handleLogout} tabIndex="4">Log Out</button>
       </div>
       </nav>
-        {/* <label>Select Month:</label><br></br>
-        <select
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
-          //style={styles.input}
-          className="form-select form-select-sm"
-        >
-          <option value="" disabled>Select a Month</option>
-          {months.map((month, index) => (
-            <option key={index} value={month}>{month}</option>
-          ))}
-        </select> */}
         {/* Main Content */}
         
         <div style={styles.chartContainer}>
@@ -304,42 +246,6 @@ const Home = () => {
       <article>
         <h1 id="barChartHeading">Bar Chart</h1>
         <p>This bar chart visualizes the configured budget and expenses for each category for the month of {selectedMonth}</p>
-        <div>
-          
-          {/* <select
-            value={selectedMonth}
-            onChange={(e) => setSelectedMonth(e.target.value)}
-            className="form-select form-select-sm"
-          >
-            <option value="" disabled>
-              Select a Month
-            </option>
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
-          </select> */}
-          {/* <label>Select Month:</label><br></br>
-          <select
-          value={selectedMonth}
-          onChange={(e) => setSelectedMonth(e.target.value)}
-          //style={styles.input}
-          className="form-select form-select-sm"
-        >
-          <option value="" disabled>Select a Month</option>
-          {months.map((month, index) => (
-            <option key={index} value={month}>{month}</option>
-          ))}
-        </select> */}
-        </div>
         {/* Bar Chart for Budget and Expenses */}
         <Bar
           data={{
@@ -361,20 +267,6 @@ const Home = () => {
               },
             ],
           }}
-          /* options={{
-           // maintainAspectRatio: false, // Set to false to allow custom width and height
-           // responsive: false, // Set to false to disable responsiveness
-            layout: {
-              padding: {
-                left: 50,
-                right: 50,
-                top: 50,
-                bottom: 50,
-              },
-            },
-          }}
-          width={400} // Set the width of the chart
-          height={400} // Set the height of the chart */
         />
       </article>
 
