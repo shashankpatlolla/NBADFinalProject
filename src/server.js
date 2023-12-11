@@ -159,7 +159,7 @@ app.post('/api/saveBudget',async (req, res) => {
   try {
 
     const user = await User.findOne({ username });
-    const hascategory = await Budget.findOne({category});
+    const hascategory = await Budget.findOne({user: user._id,category});
     
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
