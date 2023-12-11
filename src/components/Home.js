@@ -71,7 +71,7 @@ const Home = () => {
     try {
       const username = localStorage.getItem('username');
       //console.log(username);
-      const response = await axios.get('http://137.184.208.233/api/savedBudget', {
+      const response = await axios.get('http://137.184.208.233:5000/api/savedBudget', {
         headers: {
           'x-username': username,
         },
@@ -119,7 +119,7 @@ const Home = () => {
     try {
       const username = localStorage.getItem('username');
       //console.log(username);
-      const response = await axios.get('http://137.184.208.233/api/savedExpense', {
+      const response = await axios.get('http://137.184.208.233:5000/api/savedExpense', {
         headers: {
           'x-username': username,
           'x-month': selectedMonth,

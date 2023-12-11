@@ -11,7 +11,7 @@ const SignUp = () => {
   const handleSignUp = async () => {
     try {
       // Send the user details to the backend to save in MongoDB
-      const response = await axios.post('http://137.184.208.233/api/signup', { username, password },
+      const response = await axios.post('http://137.184.208.233:5000/api/signup', { username, password },
       {
         headers: {
           'Content-Type': 'application/json',

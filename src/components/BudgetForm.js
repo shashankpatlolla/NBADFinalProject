@@ -19,7 +19,7 @@ const BudgetForm = ({ onClose , updateBudgets }) => {
           }
         console.log("value of username from localstorage is",username);
       // Send the budget data to the backend to save in MongoDB
-      response = await axios.post('http://137.184.208.233/api/saveBudget', { username,category, budget });
+      response = await axios.post('http://137.184.208.233:5000/api/saveBudget', { username,category, budget });
       if(response.data.msg === 'CategoryExists')
       {
         setCategory('');

@@ -24,7 +24,7 @@ const ExpenseForm = ({ onClose, UpdateExpensesperMonth }) => {
   const GetCategories = async () =>{
     try{
     const username = localStorage.getItem('username');
-    const response = await axios.get('http://137.184.208.233/api/savedBudget', {
+    const response = await axios.get('http://137.184.208.233:5000/api/savedBudget', {
         headers: {
           'x-username': username,
         },
@@ -60,7 +60,7 @@ const ExpenseForm = ({ onClose, UpdateExpensesperMonth }) => {
         }
         
       // Send the expense/month data to the backend to save in MongoDB
-      await axios.post('http://137.184.208.233/api/saveExpenseMonth', { username,month:selectedMonth, category:selectedCategory, expense });
+      await axios.post('http://137.184.208.233:5000/api/saveExpenseMonth', { username,month:selectedMonth, category:selectedCategory, expense });
       UpdateExpensesperMonth();
       // Close the form after saving
       onClose();
