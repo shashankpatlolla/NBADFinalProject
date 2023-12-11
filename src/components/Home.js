@@ -190,7 +190,7 @@ const Home = () => {
   }, [selectedMonth]);
 
   useEffect(()=>{
-    //checkTokenExpiration();
+    checkTokenExpiration();
     updateBudgets();
   },[]);
   return (
