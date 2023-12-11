@@ -52,6 +52,7 @@ const Expense = mongoose.model('Expense', expenseSchema);
 
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
+  console.log("Test value for the IP");
   try {
     const user = await User.findOne({ username, password });
 
