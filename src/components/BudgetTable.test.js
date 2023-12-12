@@ -1,6 +1,6 @@
-import { BudgetTableforTesting } from './BudgetTable';
+import { calculatePercentageBudgetTable } from './BudgetTable';
 
-test('BudgetTableforTesting calculates percentages correctly', () => {
+test('calculatePercentageBudgetTable calculates percentages correctly', () => {
   const budgets = [
     { category: 'Groceries', budget: 1000 },
     { category: 'Entertainment', budget: 500 },
@@ -25,7 +25,7 @@ test('BudgetTableforTesting calculates percentages correctly', () => {
 
   const selectedMonth = 'December';
 
-  const result = BudgetTableforTesting({ budgets, expenses, selectedMonth });
+  const result = calculatePercentageBudgetTable({ budgets, expenses, selectedMonth });
 
   // You can now assert the result against your expectations
   expect(result).toEqual(["50.0", "100.0", "100.0", "75.0", "113.6", "166.7", "300.0"]); // Example values, replace with your expected results
@@ -44,7 +44,7 @@ test('BudgetTableforTesting handles zero budget correctly', () => {
   
     const selectedMonth = 'February';
   
-    const result = BudgetTableforTesting({ budgets, expenses, selectedMonth });
+    const result = calculatePercentageBudgetTable({ budgets, expenses, selectedMonth });
   
     expect(result).toEqual([0, 0]); // Adjust based on your expected results
   });
@@ -54,7 +54,7 @@ test('BudgetTableforTesting handles zero budget correctly', () => {
     const expenses = [];
     const selectedMonth = 'March';
   
-    const result = BudgetTableforTesting({ budgets, expenses, selectedMonth });
+    const result = calculatePercentageBudgetTable({ budgets, expenses, selectedMonth });
   
     expect(result).toEqual([]); // Adjust based on your expected results
   });

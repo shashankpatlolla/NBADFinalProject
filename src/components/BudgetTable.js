@@ -1,7 +1,7 @@
 // BudgetTable.js
 import React from 'react';
 
-export const BudgetTableforTesting = ({ budgets, expenses, selectedMonth }) => {
+export const calculatePercentageBudgetTable = ({ budgets, expenses, selectedMonth }) => {
     return budgets.map((budget) => {
       const category = budget.category;
       const budgetValue = budget.budget || 0;
