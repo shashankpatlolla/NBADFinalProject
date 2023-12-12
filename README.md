@@ -1,3 +1,32 @@
+**To run the frontend** - 
+
+1. Be at the root directory(NBADFinalProject).
+2. use command "npm run build" - to build the repository
+3. once the execution is completed, run the command serve -s build to start the application.
+4. The application runs at http://137.184.208.233:3000.
+
+
+**To run the backend server**:
+
+1. Move the repository to directory "/NBADFinalProject/src".
+2. you can run the server by 2 ways:
+	1. node server.js
+	2. pm2 start server.js
+3. Server runs at http://137.184.208.233:5000.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
