@@ -52,7 +52,7 @@ const Expense = mongoose.model('Expense', expenseSchema);
 
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
-  console.log("Test value for the IP");
+
   try {
     const user = await User.findOne({ username, password });
 
@@ -60,13 +60,8 @@ app.post('/api/login', async (req, res) => {
 
       const expirationTime = 60;
       const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: expirationTime });
-      // const token = jwt.sign({ userId: user._id }, 'your_secret_key', { expiresIn: '1h' });
-      //const token = jwt.sign({ userId: user._id }, 'your_secret_key');
-      //console.log('Generated Token:', token);
-
-      //res.status(200).json({ message: 'Login successful', token: 'yourAuthToken' });
       res.status(200).json({ message: 'Login successful', token, expiresIn: expirationTime });
-     // res.status(200).json({token});
+
     } 
     if(!user) {
       res.status(401).json({ error: 'Invalid username or password' });
@@ -80,9 +75,7 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/signup', async (req, res) => {
   const { username, password } = req.body;
-  //userid=username;
-  //console.log("Shashank is here");
-  //console.log(req.body);
+
   try {
     const existingUser = await User.findOne({ username });
 
@@ -103,10 +96,8 @@ app.post('/api/signup', async (req, res) => {
 app.get('/api/savedBudget', async (req, res) => {
   const username = req.headers['x-username'];
     
-  console.log("username from the budget get API is",username);
   try {
     const user = await User.findOne({ username });
-    console.log("user from savedBudget get API is ",user);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -125,22 +116,17 @@ app.get('/api/savedExpense', async (req, res) => {
   const username = req.headers['x-username'];
   const month = req.headers['x-month'];
     
-  console.log("username from the budget get API is",username);
-  console.log("month from the budget get API is",month);
   try {
     const user = await User.findOne({ username });
-    console.log("user from savedExpense get API is ",user);
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
     let query = { user: user._id };
-    console.log("Query is ",query);
     if (month) {
       // If month is provided, add it to the query
       query.month = month;
-      console.log("Query month is ",query.month);
     }
     // Find all budget entries associated with the user
     const expenses = await Expense.find(query);
@@ -155,7 +141,6 @@ app.get('/api/savedExpense', async (req, res) => {
 app.post('/api/saveBudget',async (req, res) => {
 
   const {username,category, budget } = req.body;
-  console.log('at savebudget POST API',req.body);
   try {
 
     const user = await User.findOne({ username });
@@ -240,47 +225,6 @@ app.get('/api/home', async (req, res) => {
   }
 });
 
-
-
-
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-
-  /* const authenticate = async (req, res, next) => {
-    console.log(req.headers);
-    const token = req.headers.authorization;
-  
-    if (!token) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-  
-    try {
-      const decoded = jwt.verify(token, 'your_secret_key');
-      req.userId = decoded.userId;
-      console.log('Decoded User ID:', req.userId);
-      next();
-    } catch (err) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-  }; */
-
-
-
-  // Endpoint to handle user signup
-/* app.post('/api/signup', async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Save the user to the MongoDB collection
-    const newUser = new User({ username, password });
-    await newUser.save();
-
-    res.status(201).json({ message: 'User created successfully' });
-  } catch (error) {
-    console.error('Signup failed:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-}); */

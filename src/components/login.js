@@ -44,6 +44,7 @@ const Login = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           style={styles.input}
+          data-cy="username"
         />
 
         <label style={styles.label}>Password:</label>
@@ -52,13 +53,14 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={styles.input}
+          data-cy="password"
         />
 
-        <button type="button" onClick={handleLogin} style={styles.button}>
+        <button type="button" onClick={handleLogin} style={styles.button} data-cy="loginbutton">
           Login
         </button>
         {LoginMessage && (
-          <div style={styles.message}>{LoginMessage}</div>
+          <div style={styles.message} data-cy="login-message">{LoginMessage}</div>
         )}
       </form>
     </div>
